@@ -16,6 +16,75 @@ class BirthdayQuest {
     }
 
     startCountdown() {
+        const countdownNumber = document.getElementById('countdown-number');
+        const progressCircle = document.getElementById('progress-circle');
+        
+        this.spawnFloatingHearts();
+        
+        // ACTUAL COUNTDOWN: November 29, 2025
+        const birthdayDate = new Date('2025-11-29T00:00:00').getTime();
+        
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+            
+            if (distance <= 0) {
+                countdownNumber.textContent = 'Now!';
+                this.showScreen('greeting-screen');
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display format with seconds always shown
+            let displayText;
+            if (days > 0) {
+                displayText = `${days}d ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            } else if (hours > 0) {
+                displayText = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            } else {
+                displayText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }
+            
+            // Add downward animation to number
+            countdownNumber.classList.add('number-animate-down');
+            countdownNumber.textContent = displayText;
+            
+            // Remove animation class after animation ends
+            setTimeout(() => {
+                countdownNumber.classList.remove('number-animate-down');
+            }, 300);
+            
+            // Update progress circle (based on percentage of year passed)
+            const totalDays = 365;
+            const progress = Math.max(0, Math.min(1, (totalDays - days) / totalDays));
+            const circumference = 565.48;
+            const offset = circumference - (progress * circumference);
+            progressCircle.style.strokeDashoffset = offset;
+            
+            // Update milestone dots
+            const dotThresholds = [365, 100, 30, 7, 1];
+            for (let i = 0; i < 5; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (days <= dotThresholds[i]) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            }
+        };
+        
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // ============================================
+        // DEMO COUNTDOWN (commented out - 5 seconds)
+        // Uncomment the code below to test 5-second demo
+        // ============================================
+        /*
         let timeLeft = 5;
         const countdownNumber = document.getElementById('countdown-number');
         const progressCircle = document.getElementById('progress-circle');
@@ -25,7 +94,14 @@ class BirthdayQuest {
         
         const countdownInterval = setInterval(() => {
             timeLeft--;
+            
+            // Add downward animation
+            countdownNumber.classList.add('number-animate-down');
             countdownNumber.textContent = timeLeft;
+            
+            setTimeout(() => {
+                countdownNumber.classList.remove('number-animate-down');
+            }, 300);
             
             const progress = (5 - timeLeft) / 5;
             const circumference = 565.48;
@@ -47,6 +123,7 @@ class BirthdayQuest {
                 this.showScreen('greeting-screen');
             }
         }, 1000);
+        */
     }
 
     spawnFloatingHearts() {
