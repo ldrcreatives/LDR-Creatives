@@ -74,7 +74,7 @@
     <div id="adventure-screen" class="screen">
         <div class="adventure-header">
             <h1 class="adventure-title-main">Your Birthday Quest Adventure Begins</h1>
-            <p class="adventure-description">Complete all 6 challenges to unlock your special birthday surprises and gifts. Each challenge reveals a heartfelt present just for you! ❤️</p>
+            <p class="adventure-description">Complete all 6 challenges to unlock your special birthday surprises and gifts. Each challenge reveals a heartfelt present just for you!</p>
             
             <div class="progress-tracker">
                 <span class="progress-text"><span id="completed-count">0</span>/6</span>
@@ -191,8 +191,45 @@
         </div>
     </div>
 
+
+
     <!-- Song Challenge -->
     <div id="song-challenge-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+            <button class="modal-close">✕</button>
+
+            <div class="modal-header">
+                <h2 id="song-title">Guess the Song</h2>
+                <p id="song-subtitle">Tap the letters to complete the song title</p>
+                <div style="font-size:0.9rem; margin-top:4px; opacity:0.8;">
+                    Hint: A song from Ben&Ben
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- This is where the keyboard + answer preview is injected -->
+                <div id="song-lyrics"></div>
+
+                <!-- error -->
+                <div id="song-error" class="error-message hidden"></div>
+
+                <!-- audio player -->
+                <div id="song-player" class="song-player hidden" style="margin-top:15px;">
+                    <audio id="song-audio"></audio>
+
+                    <button id="play-song" class="btn btn-primary" style="margin-top:6px;">
+                        ▶ Play Song
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="song-challenge-modal" class="modal hidden">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <button class="modal-close">✕</button>
@@ -221,35 +258,52 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Puzzle Challenge -->
     <div id="puzzle-challenge-modal" class="modal hidden">
         <div class="modal-overlay"></div>
+
         <div class="modal-content">
             <button class="modal-close">✕</button>
+
             <div class="modal-header">
-                <h2 id="puzzle-title">Solve the Puzzle</h2>
-                <p id="puzzle-subtitle">Tap two pieces to swap them</p>
+                <h2 id="puzzle-title">Find the Matching Pairs</h2>
+                <p id="puzzle-subtitle">Tap two cards to match them</p>
             </div>
+
             <div class="modal-body">
-                <div class="puzzle-grid" id="puzzle-grid"></div>
-                <button class="btn btn-outline" id="shuffle-puzzle">Shuffle</button>
+               <div class="memory-grid" id="memory-grid"></div>
+                <div style="margin-top:15px;">
+                    <div id="memory-progress-container">
+                        <div id="memory-progress-fill"></div>
+                    </div>
+                    <p id="memory-progress-text" style="text-align:center;margin-top:5px;font-size:0.9rem;color:#666;">
+                        0 / 9 pairs matched
+                    </p>
+                </div>
+
+
+
                 <div id="album-view" class="album-view hidden">
                     <div class="polaroid-container">
-                        <img id="album-display" class="album-image" src="https://via.placeholder.com/200?text=Memory" alt="Memory">
+                        <img id="album-display" class="album-image" src="" alt="Memory">
                         <div class="polaroid-text" id="polaroid-text">Our Love</div>
                     </div>
+
                     <div class="album-dots" id="album-dots"></div>
+
                     <div class="button-group">
                         <button class="btn btn-outline" id="prev-photo">← Previous</button>
                         <button class="btn btn-outline" id="next-photo">Next →</button>
                     </div>
+
                     <button class="btn btn-primary" id="finish-album">I Love It!</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Gift Reveal Modal -->
     <div id="gift-modal" class="modal hidden">
@@ -282,6 +336,39 @@
             </div>
         </div>
     </div>
+
+    <!-- FINAL SURPRISE MODAL -->
+    <div id="final-surprise-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+            <button class="modal-close">✕</button>
+
+            <div class="modal-header">
+                <h2>Happy Birthday, love</h2>
+                <p>I hope you enjoyed your quest. Here’s one last surprise...</p>
+            </div>
+
+            <div class="modal-body">
+
+                <div id="polaroid-carousel" style="text-align:center;">
+                    <img id="polaroid-photo" 
+                        class="polaroid" 
+                        src="" 
+                        style="width:220px;height:220px;object-fit:cover;border:8px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);margin-bottom:10px;border-radius:4px;">
+                    <div id="polaroid-caption" style="font-size:0.9rem;opacity:0.8;margin-bottom:10px;"></div>
+
+                    <button id="prev-polaroid" class="btn btn-outline" style="margin-right:5px;">← Prev</button>
+                    <button id="next-polaroid" class="btn btn-outline">Next →</button>
+                </div>
+
+                <button id="close-surprise" class="btn btn-primary" style="margin-top:15px;">
+                    Aww I Love It 
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <script type="module" src="src/app.js"></script>
 </body>
