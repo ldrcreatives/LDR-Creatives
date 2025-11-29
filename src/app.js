@@ -47,16 +47,45 @@ class BirthdayQuest {
             margin:0;
             cursor:pointer;
         }
+            /* Make flower modal content scrollable */
+            #flower-challenge-modal .modal-body {
+                max-height: 70vh;
+                overflow-y: auto;
+                padding-bottom: 80px;
+            }
+
+            /* Keep input area visible on mobile */
+            #flower-input {
+                position: sticky;
+                bottom: 10px;
+                background: white;
+                padding: 8px;
+                border-radius: 6px;
+                z-index: 20;
+            }
+
             .memory-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 6px;
             margin: 10px auto;
         }
+        /* Make grid fully responsive on mobile */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            width: 100%;
+            max-width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
 
+        /* Each tile auto-scales depending on screen width */
         .memory-tile {
-            width: 70px;
-            height: 70px;
+            width: 100%;
+            aspect-ratio: 1 / 1;        /* Perfect square */
             perspective: 600px;
             cursor: pointer;
         }
@@ -94,6 +123,7 @@ class BirthdayQuest {
         .matched .tile-inner {
             outline: 3px solid #ff7eb3;
         }
+
 
         .album-view .dot {
             width: 10px;
